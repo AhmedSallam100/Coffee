@@ -1,0 +1,102 @@
+.searchNow {
+  padding-top: var(--padding);
+}
+
+.SearchText h1 {
+  color: var(--main-color);
+  margin-bottom: 10px;
+}
+form .form-group input,
+select {
+  font-size: 20px;
+}
+form .form-group input {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  background-color: var(--placeholder);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+form .form-group select {
+  width: 19%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: var(--placeholder);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  margin-left: 1%;
+  margin-bottom: 20px;
+}
+@media (max-width: 1200px) {
+  form .form-group select {
+    display: block;
+    margin-left: 0;
+    width: 35%;
+  }
+}
+.itemList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minMax(350px, 1fr));
+  gap: 100px;
+  justify-content: center;
+}
+.itemList li {
+  background-color: var(--placeholder);
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.itemList li img {
+  max-width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.details span {
+  color: var(--dark-color);
+}
+
+li button {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 10px;
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+li::marker {
+  content: "";
+}
