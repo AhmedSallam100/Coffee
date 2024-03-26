@@ -20,6 +20,12 @@
   font-weight: bold;
   font-size: 25px;
 }
+.head .container .whereTo span {
+  transition: 0.3s;
+}
+.head .container .whereTo span:hover {
+  color: var(--main-color);
+}
 .head .container .links .ul-links {
   display: flex;
   gap: 74px;
@@ -44,7 +50,7 @@
   width: 100%;
   height: 15px;
   position: absolute;
-  top: -20px;
+  top: -24px;
   border-radius: 12px;
   transition: 0.3s;
   background-color: var(--main-color);
