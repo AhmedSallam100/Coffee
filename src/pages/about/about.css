@@ -1,5 +1,6 @@
 .about-us {
-  padding-top: calc(var(--padding) + 30px);
+   margin-top: 30px;
+
 }
 .about-us-text h1 {
   color: var(--main-color);
