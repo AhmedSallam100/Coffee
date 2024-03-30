@@ -33,7 +33,7 @@ async function renderData(url, searchIn, setCoffeData, setnotFound) {
     searchIn.toLowerCase() === "cafe"
       ? ApiData
       : [...ApiData].filter((data) =>
-          data.search.toLowerCase().includes(searchIn)
+          data.search.toLowerCase().includes(searchIn.toLowerCase())
         );
   if (ApiDataTargeted.length === 0) {
     setnotFound("Not Found");
