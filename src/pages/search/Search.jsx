@@ -74,6 +74,7 @@ function FindNow({
           onChange={setSearchCategorie}
           setCoffeData={setCoffeData}
           setSearchIn={setSearchIn}
+          setnotFound={setnotFound}
         />
       </div>
     </form>
@@ -90,10 +91,11 @@ function SearchInput({ setSearchIn, searchIn }) {
     ></input>
   );
 }
-function Categories({ searchCategorie, onChange, setCoffeData, setSearchIn }) {
+function Categories({ searchCategorie, onChange, setCoffeData, setSearchIn, setnotFound }) {
   async function handleCategories(value) {
     onChange(value);
     setCoffeData([]);
+    setnotFound('');
     setSearchIn("");
     const data = await handleApi("https://coffee-backend-phi.vercel.app/cafes");
     setCoffeData(() => data);
