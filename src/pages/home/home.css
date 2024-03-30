@@ -88,6 +88,11 @@ section.header .homeBackground {
   padding-bottom: 20px;
 }
 
+@media(max-width:1100px){
+  .discovery{
+    margin-top : 290px;
+  }
+}
 /******services section********/
 .services {
   padding-top: 20px;
