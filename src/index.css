@@ -28,12 +28,29 @@ code {
   color: var(--white-color);
   background-color: var(--dark-color);
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  /* box-shadow: 0px 0px 30px 30px var(--main-color); */
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-color);
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: var(--gray-color);
   font-family: "Cairo", sans-serif;
+}
+*:focus {
+  outline: none;
+  border: none;
 }
 html,
 body {

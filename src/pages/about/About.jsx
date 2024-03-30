@@ -1,11 +1,16 @@
-import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 
 import "./about.css";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const About = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
-      <Navbar />
       <AboutBody />
     </>
   );
@@ -27,32 +32,40 @@ function AboutDetails() {
     <div className="aboutus-Header">
       <div className="about-info">
         <div className="about-data">
-          <Svg />
-          <span>
-            My Qahwati platform helps users discover cafés and locate them in
-            their area or around the world. It serves as a comprehensive guide
-            to cafes, providing detailed information about each store. Such as
-            location, opening hours, contact details, menus and customer ratings
-          </span>
+          <div data-aos="fade-right" data-aos-duration="1000">
+            <Svg />
+            <span>
+            Where to platform helps users discover cafés and locate them in their area or around the world. It serves as a comprehensive guide to cafes, providing detailed information about each store. Such as location, opening hours, contact details, menus and customer ratings
+            </span>
+          </div>
         </div>
         <div className="about-data">
-          <Svg />
-          <span>
-            My Qahwati platform helps users discover cafés and locate them in
-            their area or around the world. It serves as a comprehensive guide
-            to cafes, providing detailed information about each store. Such as
-            location, opening hours, contact details, menus and customer ratings
-          </span>
+          <div data-aos="fade-right" data-aos-duration="1500">
+            <Svg />
+            <span>
+              Find the perfect coffee shop for your next caffeine fix. Discover
+              local and chain coffee shops in your area or wherever you travel.
+              Read reviews, view addresses and hours, and find your new favorite
+              coffee spot with us. Your perfect cup of coffee is just a click
+              away.
+            </span>
+          </div>
         </div>
-        <div className="about-buttons">
+        <div
+          className="about-buttons"
+          data-aos="fade-right"
+          data-aos-duration="1700"
+        >
           <Link to="/search">Search </Link>
           <Link to="/contact">Contact </Link>
         </div>
       </div>
-      <img
-        src={process.env.PUBLIC_URL + "./assets/about-imgs/about.png"}
-        alt="about"
-      />
+      <div data-aos="fade-left" data-aos-duration="1500">
+        <img
+          src={process.env.PUBLIC_URL + "./assets/about-imgs/about.png"}
+          alt="about"
+        />
+      </div>
     </div>
   );
 }

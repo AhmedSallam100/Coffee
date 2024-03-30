@@ -1,15 +1,19 @@
-import { useState } from "react";
-import Navbar from "../Navbar/Navbar";
+import { useEffect, useState } from "react";
 import "./search.css";
-import { CaffeData } from "../../data/data";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import { TextHeader } from "../../staticComponent/headerText";
 import handleSubmit from "../../data/handleApi";
+import { handleApi } from "../../data/handleApi";
 import { Link } from "react-router-dom";
 
 const Search = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
-      <Navbar />
       <SearchBody />
     </>
   );
@@ -25,7 +29,6 @@ function SearchBody() {
         <FindNow
           searchCategorie={searchCategorie}
           setSearchCategorie={setSearchCategorie}
-          CoffesData={CoffesData}
           setCoffeData={setCoffeData}
           notFound={notFound}
           setnotFound={setnotFound}
@@ -48,9 +51,18 @@ function FindNow({
 }) {
   const [searchIn, setSearchIn] = useState("");
 
-  function handleEvent(e) {
+  async function handleEvent(e) {
     e.preventDefault();
-    handleSubmit(searchIn, setSearchIn, setCoffeData, setnotFound);
+    if (!searchIn) return;
+    setSearchCategorie("");
+    const data = await handleSubmit(
+      searchIn,
+      setSearchIn,
+      setCoffeData,
+      setnotFound
+    );
+
+    console.log(data);
   }
   return (
     <form onSubmit={handleEvent}>
@@ -79,10 +91,12 @@ function SearchInput({ setSearchIn, searchIn }) {
   );
 }
 function Categories({ searchCategorie, onChange, setCoffeData, setSearchIn }) {
-  function handleCategories(value) {
+  async function handleCategories(value) {
     onChange(value);
     setCoffeData([]);
     setSearchIn("");
+    const data = await handleApi("https://coffee-backend-phi.vercel.app/cafes");
+    setCoffeData(() => data);
   }
   return (
     <select
@@ -91,15 +105,15 @@ function Categories({ searchCategorie, onChange, setCoffeData, setSearchIn }) {
     >
       <option>Select</option>
       <option value="cafe">Cafe </option>
-      <option value="playstation">Cafe & Playstation</option>
-      <option value="food">Cafe & Food</option>
-      <option value="study">Cafe & Study</option>
-      <option value="conference">Conference Room</option>
+      <option value="CoffeAndPlaystation">Cafe & Playstation</option>
+      <option value="CoffeAndFood">Cafe & Food</option>
+      <option value="CoffeAndStudy">Cafe & Study</option>
+      <option value="ConferenceRoom">Conference Room</option>
     </select>
   );
 }
 function Item({ searchCategorie, CoffesData, notFound }) {
-  if (CoffesData.length > 0) {
+  if (CoffesData.length > 0 && searchCategorie === "") {
     return (
       <ItemList>
         {CoffesData.map((data) => {
@@ -113,46 +127,56 @@ function Item({ searchCategorie, CoffesData, notFound }) {
   if (searchCategorie === "cafe") {
     return (
       <ItemList>
-        {CaffeData[0].Coffe.map((data) => {
-          return <ItemDetails data={data} key={data.name} />;
-        })}
+        {CoffesData.filter((data) => data.category === searchCategorie).map(
+          (data) => {
+            return <ItemDetails data={data} key={data.name} />;
+          }
+        )}
       </ItemList>
     );
   }
 
-  if (searchCategorie === "playstation") {
+  if (searchCategorie === "CoffeAndPlaystation") {
     return (
       <ItemList>
-        {CaffeData[0].CoffeAndPlaystation.map((data) => {
-          return <ItemDetails data={data} key={data.name} />;
-        })}
+        {CoffesData.filter((data) => data.category === searchCategorie).map(
+          (data) => {
+            return <ItemDetails data={data} key={data.name} />;
+          }
+        )}
       </ItemList>
     );
   }
-  if (searchCategorie === "food") {
+  if (searchCategorie === "CoffeAndFood") {
     return (
       <ItemList>
-        {CaffeData[0].CoffeAndFood.map((data) => {
-          return <ItemDetails data={data} key={data.name} />;
-        })}
+        {CoffesData.filter((data) => data.category === searchCategorie).map(
+          (data) => {
+            return <ItemDetails data={data} key={data.name} />;
+          }
+        )}
       </ItemList>
     );
   }
-  if (searchCategorie === "study") {
+  if (searchCategorie === "CoffeAndStudy") {
     return (
       <ItemList>
-        {CaffeData[0].CoffeAndStudy.map((data) => {
-          return <ItemDetails data={data} key={data.name} />;
-        })}
+        {CoffesData.filter((data) => data.category === searchCategorie).map(
+          (data) => {
+            return <ItemDetails data={data} key={data.name} />;
+          }
+        )}
       </ItemList>
     );
   }
-  if (searchCategorie === "conference") {
+  if (searchCategorie === "ConferenceRoom") {
     return (
       <ItemList>
-        {CaffeData[0].ConferenceRoom.map((data) => {
-          return <ItemDetails data={data} key={data.name} />;
-        })}
+        {CoffesData.filter((data) => data.category === searchCategorie).map(
+          (data) => {
+            return <ItemDetails data={data} key={data.name} />;
+          }
+        )}
       </ItemList>
     );
   }
@@ -167,7 +191,7 @@ export function ItemDetails({ data }) {
         <span>{data.name}</span>
         <Star />
       </div>
-      <Link to={`/cafes/${data.name}`}>See More</Link>
+      <Link to={`/cafes/${data.id}`}>See More</Link>
     </li>
   );
 }
@@ -231,7 +255,9 @@ export function Star() {
 export function ItemList({ children }) {
   return (
     <div className="container">
-      <ul className="itemList">{children}</ul>
+      <ul className="itemList" data-aos="fade-down" data-aos-duration="1500">
+        {children}
+      </ul>
     </div>
   );
 }
