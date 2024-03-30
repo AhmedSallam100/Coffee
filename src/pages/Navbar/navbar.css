@@ -90,6 +90,9 @@
   .head .container .links {
     display: none;
   }
+  .mobile-menu {
+    display: block !important;
+  }
 
   .head .container .logo {
     display: flex;
@@ -97,13 +100,16 @@
     gap: 10px;
   }
 
-  .head .container .menu-icon {
+  /* .head .container .menu-icon {
     display: flex;
-  }
+  } */
 }
 
 /*================= [End Header] =================*/
 /*================= [Start Nav Menu] =================*/
+nav {
+  height: 80px;
+}
 .nav-menu {
   position: fixed;
   width: 100%;
@@ -170,4 +176,28 @@
 
 .nav-menu.active-menu {
   transform: translateX(0);
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 9;
+  background-color: var(--placeholder);
+  box-shadow: 0px -8px 69px -24px rgba(0, 0, 0, 0.75);
+  border-radius: 16px 16px 0 0;
+}
+.mobile-menu .container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.mobile-icon i {
+  font-style: 20px;
+}
+.mobile-icon span {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--dark-color);
+  margin-left: 5px;
 }

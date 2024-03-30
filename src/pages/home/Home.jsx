@@ -1,16 +1,19 @@
-import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
-import { CaffeData } from "../../data/data";
 import { ItemList } from "../search/Search";
 import { ItemDetails } from "../search/Search";
 import ParticlesComponent from "../../data/particle-config";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import "./home.css";
+import { useEffect, useState } from "react";
+
+
 const Home = () => {
   return (
     <>
-      <Navbar />
       <ParticlesComponent id="particles" />
+
       <Header />
       <Discovery />
       <Services />
@@ -18,11 +21,18 @@ const Home = () => {
   );
 };
 function Header() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <section className="header">
       <div className="container">
         <div className="homeBackground">
-          <div className="header-title">
+          <div
+            className="header-title"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
             <h1>
               Refresh your day and yourself with the <span>Where To</span>{" "}
               platform
@@ -46,34 +56,41 @@ function Header() {
               </Link>
             </ul>
           </div>
-          <img
-            src={
-              process.env.PUBLIC_URL +
-              "/assets/Pumpkin-Spice-Latte-Coffee-vector-Graphics-77529071-1-removebg-preview-removebg-preview.png"
-            }
-            alt="coffe"
-          />
+          <div data-aos="fade-left" data-aos-duration="1000">
+            <img
+              src={
+                process.env.PUBLIC_URL +
+                "/assets/Pumpkin-Spice-Latte-Coffee-vector-Graphics-77529071-1-removebg-preview-removebg-preview.png"
+              }
+              alt="coffe"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 function Discovery() {
+  const [cafeListdata, setCafeListdata] = useState(null);
+  useEffect(() => {
+    fetch("https://coffee-backend-phi.vercel.app/cafes")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw response;
+      })
+      .then((data) => {
+        setCafeListdata(data);
+      });
+  }, []);
+  console.log(cafeListdata);
   return (
     <section className="discovery">
       <h1 className="main-title">discovery</h1>
       <div className="container">
         <ItemList>
-          {CaffeData[0].CoffeAndPlaystation.map((data) => {
-            return <ItemDetails data={data} key={data.name} />;
-          })}
-          {CaffeData[0].Coffe.map((data) => {
-            return <ItemDetails data={data} key={data.name} />;
-          })}
-          {CaffeData[0].CoffeAndStudy.map((data) => {
-            return <ItemDetails data={data} key={data.name} />;
-          })}
-          {CaffeData[0].CoffeAndFood.map((data) => {
+          {cafeListdata?.map((data) => {
             return <ItemDetails data={data} key={data.name} />;
           })}
         </ItemList>
@@ -87,7 +104,11 @@ function Services() {
       <h1 className="main-title">What We're Offering</h1>
       <p>Services Built Specifically for your Business</p>
       <div className="services-cards">
-        <div className="service-card">
+        <div
+          className="service-card"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
           <div className="service-circle"></div>
           <div className="service-info">
             <h2>
@@ -99,7 +120,11 @@ function Services() {
             </p>
           </div>
         </div>
-        <div className="service-card">
+        <div
+          className="service-card"
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
           <div className="service-circle"></div>
           <div className="service-info">
             <h2>
@@ -111,7 +136,11 @@ function Services() {
             </p>
           </div>
         </div>
-        <div className="service-card">
+        <div
+          className="service-card"
+          data-aos="fade-right"
+          data-aos-duration="1500"
+        >
           <div className="service-circle"></div>
           <div className="service-info">
             <h2>
@@ -123,7 +152,11 @@ function Services() {
             </p>
           </div>
         </div>
-        <div className="service-card">
+        <div
+          className="service-card"
+          data-aos="fade-left"
+          data-aos-duration="1500"
+        >
           <div className="service-circle"></div>
           <div className="service-info">
             <h2>

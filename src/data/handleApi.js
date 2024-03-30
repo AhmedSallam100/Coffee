@@ -1,4 +1,4 @@
-async function handleApi(url) {
+export async function handleApi(url) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -10,20 +10,22 @@ async function handleApi(url) {
     console.error("Error:", error);
   }
 }
-export default function handleSubmit(
+export default async function handleSubmit(
   searchIn,
   setSearchIn,
   setCoffeData,
   setnotFound
 ) {
   if (!searchIn) return;
-  renderData(
+  setCoffeData([]);
+  const data = await renderData(
     "https://coffee-backend-phi.vercel.app/cafes",
     searchIn,
     setCoffeData,
     setnotFound
   );
   setSearchIn("");
+  return data;
 }
 async function renderData(url, searchIn, setCoffeData, setnotFound) {
   const ApiData = await handleApi(url);
@@ -42,4 +44,5 @@ async function renderData(url, searchIn, setCoffeData, setnotFound) {
       ? ApiDataTargeted
       : [ApiDataTargeted]
   );
+  return ApiData;
 }

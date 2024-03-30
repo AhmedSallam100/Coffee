@@ -17,6 +17,7 @@
   overflow: hidden;
   border-radius: 16px;
   width: 497.33px;
+  max-width: 100%;
 }
 .cafe-imgs .img-box:hover img {
   transform: scale(1.1);
@@ -81,6 +82,10 @@
 }
 .details-boxes .box p {
   font-size: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 .details-boxes .box hr {
   margin: 10px 0;
@@ -102,7 +107,9 @@
   flex-direction: row-reverse;
   gap: 5px;
 }
-.cafe-details .container button {
+.cafe-details .container a {
+  display: block;
+  text-align: center;
   width: 100%;
   color: var(--white-color);
   padding: 4px;
@@ -117,12 +124,17 @@
   color: var(--dark-color);
   transition: 0.3s;
 }
-.cafe-details .container button:hover {
+.cafe-details .container a:hover {
   color: var(--white-color);
   background-color: var(--dark-color);
 }
 .location-box {
   justify-content: normal !important;
+  /* p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } */
 }
 .location-box img {
   width: 140px;
@@ -156,4 +168,9 @@
 }
 .location-details .location i {
   font-size: 24px;
+}
+@media (max-width: 495px) {
+  .details-boxes {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
 }

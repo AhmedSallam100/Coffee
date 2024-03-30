@@ -1,26 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
 export default function Navbar() {
   return (
     <nav>
-      <Menu />
+      <MobileHead />
       <Head />
     </nav>
-  );
-}
-function Menu() {
-  return (
-    <div className="nav-menu">
-      <div className="close-menu">
-        <i className="uil uil-times"></i>
-      </div>
-      <div className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/search">Search now</Link>
-        <Link to="/contact">Contact us</Link>
-        <Link to="/about">About us</Link>
-      </div>
-    </div>
   );
 }
 function Head() {
@@ -28,7 +13,7 @@ function Head() {
     <div className="head">
       <div className="container">
         <div className="logo">
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <NavLink to="/" style={{ textDecoration: "none" }}>
             <div className="whereTo">
               <span>Where To</span>
               <svg
@@ -47,23 +32,21 @@ function Head() {
                 ></path>
               </svg>
             </div>
-          </Link>
+          </NavLink>
         </div>
         <div className="links">
           <ul className="ul-links">
             <li>
-              <Link to="/" className="active">
-                Home
-              </Link>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <Link to="/search">Search now</Link>
+              <NavLink to="/search">Search now</NavLink>
             </li>
             <li>
-              <Link to="/contact">Contact us</Link>
+              <NavLink to="/contact">Contact us</NavLink>
             </li>
             <li>
-              <Link to="/about">About us</Link>
+              <NavLink to="/about">About us</NavLink>
             </li>
           </ul>
         </div>
@@ -76,9 +59,35 @@ function Head() {
   );
 }
 
-
-
-
-
-
-
+function MobileHead() {
+  return (
+    <div className="mobile-menu">
+      <div className="container">
+        <Link to={"/"}>
+          <div className="mobile-icon">
+            <i class="uil uil-estate"></i>
+            <span>Home</span>
+          </div>
+        </Link>
+        <Link to={"/search"}>
+          <div className="mobile-icon">
+            <i class="uil uil-search"></i>
+            <span>Search</span>
+          </div>
+        </Link>
+        <Link to={"/contact"}>
+          <div className="mobile-icon">
+            <i class="uil uil-phone"></i>
+            <span>Contact</span>
+          </div>
+        </Link>
+        <Link to={"/about"}>
+          <div className="mobile-icon">
+            <i class="uil uil-users-alt"></i>
+            <span>About</span>
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
+}
