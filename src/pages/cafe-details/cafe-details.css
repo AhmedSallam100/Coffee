@@ -123,6 +123,7 @@
   background: transparent;
   color: var(--dark-color);
   transition: 0.3s;
+  margin-bottom: 100px;
 }
 .cafe-details .container a:hover {
   color: var(--white-color);
